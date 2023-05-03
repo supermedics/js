@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      #display {
+        position: relative;
+        width: 640px;
+        height: 360px;
+        overflow: hidden;
+      }
+      #container {
+        position: absolute;
+        width: 1920px;
+        height: 360px;
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+        left: 0;
+        transition: 1s;
+      }
+      #container div {
+        position: absolute;
+        width: 640px;
+        height: 360px;
+      }
+      div#red {
+        background-color: red;
+        left: 0;
+      }
+      div#blue {
+        background-color: blue;
+        left: 640px;
+      }
+      div#green {
+        background-color: green;
+        left: 1280px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="display">
+      <div id="container">
+        <div id="red"></div>
+        <div id="blue"></div>
+        <div id="green"></div>
+      </div>
+    </div>
+    <script>
+      const container = document.querySelector("#container");
+      let flag = 0;
+      setInterval(() => {
+        let left = container.style.left;
+        console.log(flag);
+
+        if (flag == 0) {
+          container.style.left = "0px";
+
+          flag++;
+        } else if (flag == 1) {
+          container.style.left = "-640px";
+          flag++;
+        } else if (flag == 2) {
+          container.style.left = "-1280px";
+          container.style.transition = "0";
+          flag = 0;
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
