@@ -118,9 +118,32 @@
         drawNum: 0,
       };
       show(ready, score);
-      const colorClass = ["red", "blue", "yellow"];
+      const handClass = ["gawi", "bawi", "bo"];
 
+      function changeHand() {
+        const hand = document.querySelector("#hand");
+        //console.log(hand);
+        const currentClass = hand.classList.item(0); // 현재 적용된 클래스 이름 가져오기
+        // console.log(currentClass);
+        const currentIndex = handClass.indexOf(currentClass); // 현재 클래스의 인덱스 찾기
+        const nextIndex = (currentIndex + 1) % handClass.length; // 다음 클래스의 인덱스 계산
+        const nextClass = handClass[nextIndex]; // 다음 클래스 이름 가져오기
+
+        hand.classList.remove(currentClass); // 현재 클래스 제거
+        hand.classList.add(nextClass); // 다음 클래스 추가
+      }
+      let intervalID;
+      (() => {
+        intervalID = setInterval(changeHand, 1000);
+      })();
+      function reExecute() {
+        intervalID = setInterval(changeHand, 1000);
+      }
+      function stopInterval() {
+        clearInterval(intervalID);
+      }
       function cpu(human) {
+        stopInterval();
         let cpu = document.querySelector("#cpu");
         let hand = document.querySelector("#hand");
         let myhand = document.querySelector("#myhand");
@@ -192,6 +215,8 @@
         score.loseNum = 0;
         score.drawNum = 0;
         show(ready, score);
+        reExecute();
+
         hand.className = "gawi";
         myhand.className = "gawi";
       }
