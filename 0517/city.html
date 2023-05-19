@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <base href="localhost:">
+</head>
+
+  <style>
+    .menu {
+      position: absolute;
+      height: 100vh;
+      width: 100px;
+      left: -100px;
+      top: 0;
+      background-color: red;
+    }
+    .menu .active {
+        left: 0px
+    }
+  </style>
+</head>
+<body>
+  <div href="" class="city">서울</div>
+  <div class="city">부산</div>
+  <div class="city">대구</div>
+  <div class="city">대전</div>
+  <div class="city">광주</div>
+  <button onclick="myFuction()">숨기기</button>
+  <button onclick="toggleMenu()" style="z-index: 99; position: relative">
+    메뉴
+  </button>
+  <div class="menu active">메뉴</div>
+  <script>
+    function myFuction() {
+      let x = document.querySelectorAll(".city");
+      console.dir(x);
+      let arr = Array.from(x);
+      console.dir(arr);
+      arr.forEach((i, index) => {
+        i.style.transition = "0.4s";
+        i.style.transitionDelay = index * 0.4 + "s";
+        i.style.background = "red";
+      });
+    }
+    function toggleMenu() {
+      let menu = document.querySelector(".menu");
+      menu.classList.toggle("active");
+    }
+  </script>
+</body>
+</html>

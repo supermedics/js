@@ -1,0 +1,15 @@
+<body></body>
+<script>
+  let n = [
+    { name: "홍길동", age: 21 },
+    { name: "고길동", age: 4 },
+    { name: "마길동", age: 56 },
+  ];
+  // 배열을 body에 테이블로 표시
+  // 이름, 나이 필드를 누르면 소팅
+  let table = document.createElement("table");
+  let nameHead = table.createElement("th");
+  let ageHead = table.createElement("th");
+  nameHead.textContent = "이름";
+  ageHead.textContent = "나이   ";
+</script>

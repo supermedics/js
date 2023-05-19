@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   let date = new Date(2012, 1, 20, 03, 12);
+      //   console.log(date);
+      //   let date = new Date(2012, 0, 3); // 2012년 1월 3일
+
+      //   function getWeekDay(date) {
+      //     let days = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
+      //     return days[date.getDay()];
+      //   }
+
+      //   console.log(getWeekDay(date));
+
+      //   let date = new Date(2019, 11, 5); // 2019년 11월 5일
+
+      //   function getLocalDay(date) {
+      //     let days = ["1", "2", "3", "4", "5", "6", "7"];
+      //     return days[date.getDay()];
+      //   }
+      //   console.log(getLocalDay(date)); // 금요일이므로, 5가 출력되어야 함
+
+      //   let date = new Date(2015, 0, 2); // 2015년 1월 2일
+      //   function getDateAgo(date, days) {
+      //     //console.log(date);
+      //     const dayGap = new Date(date);
+      //     dayGap.setDate(date.getDate() - days);
+      //     return dayGap.getDate();
+      //   }
+      //   console.log(getDateAgo(date, 1)); // 1, (2015년 1월 1일)
+      //   console.log(getDateAgo(date, 2)); // 31, (2014년 12월 31일)
+      //   console.log(getDateAgo(date, 365)); // 2, (2014년 1월 2일)
+
+      //   function getLastDayOfMonth(year, month) {
+      //     let date = 0;
+      //     if (month == 2) {
+      //       date = new Date(year, month - 1, 29);
+      //       result = date.getDate() == 1 ? 28 : 29;
+      //       //console.log(result);
+      //       return result;
+      //     } else {
+      //       date = new Date(year, month - 1, 31);
+      //       result = date.getDate() == 1 ? 30 : 31;
+      //       //console.log(result);
+      //       return result;
+      //     }
+      //   }
+      //   getLastDayOfMonth(2012, 1);
+
+      function getSecondsToday() {
+        let now = new Date();
+        console.log(
+          now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds()
+        );
+        // setInterval(getSecondsToday(), 1000);
+      }
+    </script>
+  </body>
+</html>

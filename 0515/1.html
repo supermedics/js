@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <div id="result"></div>
+    <script>
+      upFirst("john");
+      function upFirst(str) {
+        let text = str;
+
+        str = text[0].toUpperCase() + text.slice(1);
+        result.insertAdjacentHTML("afterbegin", str);
+        return str;
+      }
+      function truncate(str, maxlength) {}
+    </script>
+  </head>
+  <body></body>
+</html>

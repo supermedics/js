@@ -21,25 +21,7 @@
       .view {
         height: 200px;
       }
-      #coins {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
-        height: 100px;
-      }
-      .coin {
-        height: 40px;
-        width: 80px;
-        font-weight: 700;
-      }
-      .coin[onclick="reset()"] {
-        background-color: black;
-        color: white;
-      }
-      .coin:active {
-        background-color: red;
-      }
+
       .gawi {
         position: absolute;
         clip: rect(0px, 160px, 180px, 0px);
@@ -55,7 +37,6 @@
       #judgment {
         height: 110px;
         background-color: black;
-
         font-size: 600;
         text-align: center;
         display: flex;
@@ -81,6 +62,50 @@
         background-color: yellow !important;
         color: #000 !important;
       }
+
+      #coins div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+      .coin2 {
+        height: 166px;
+        width: 33.3%;
+      }
+
+      #coins > div > div:first-child {
+        background: no-repeat
+          url("https://cdn.seniortimes.kr/news/photo/202301/3002806_28762_5741.png");
+        background-position: 18px 0px;
+      }
+      #coins > div > div:nth-child(2) {
+        background: no-repeat
+          url("https://cdn.seniortimes.kr/news/photo/202301/3002806_28762_5741.png");
+        background-position: -164px 0px;
+      }
+      #coins > div > div:last-child {
+        background: no-repeat
+          url("https://cdn.seniortimes.kr/news/photo/202301/3002806_28762_5741.png");
+        background-position: -340px 0px;
+      }
+      .coin {
+        height: 40px;
+        width: 80px;
+        font-weight: 700;
+      }
+      .coin:not([id="reset"]) {
+        display: none;
+      }
+      #reset {
+        background-color: black;
+        color: white;
+      }
+      .coin:active {
+        background-color: red;
+      }
+      .coin2:active {
+        background-color: green;
+      }
     </style>
   </head>
   <body>
@@ -104,10 +129,17 @@
 
       <div id="judgment"></div>
       <div id="coins">
-        <button class="coin" onclick="cpu(0)">가위</button>
-        <button class="coin" onclick="cpu(1)">바위</button>
-        <button class="coin" onclick="cpu(2)">보</button>
-        <button class="coin" onclick="reset()">재설정</button>"
+        <div id="newBtn">
+          <div class="coin2" data-type="1"></div>
+          <div class="coin2" data-type="2"></div>
+          <div class="coin2" data-type="3"></div>
+        </div>
+        <div>
+          <button class="coin" onclick="cpu(0)">가위</button>
+          <button class="coin" onclick="cpu(1)">바위</button>
+          <button class="coin" onclick="cpu(2)">보</button>
+          <button class="coin" id="reset" onclick="reset()">재설정</button>
+        </div>
       </div>
     </div>
     <script>
@@ -116,6 +148,19 @@
         winNum: 0,
         loseNum: 0,
         drawNum: 0,
+      };
+      window.onload = () => {
+        document.getElementById("newBtn").addEventListener("click", (e) => {
+          if (e.target && e.target.matches(".coin2")) {
+            const coinIndex = Array.from(e.target.parentNode.children).indexOf(
+              e.target
+            );
+            // coinIndex를 사용하여 coin2 클릭 처리 로직을 작성합니다.
+            // 예: console.log("Coin2 index:", coinIndex);
+            console.log(coinIndex);
+            cpu(coinIndex);
+          }
+        });
       };
       show(ready, score);
       const handClass = ["gawi", "bawi", "bo"];
@@ -167,31 +212,33 @@
         console.log(com);
         setTimeout(Judgment(human, com), 5000);
       }
-      const win = "<p class='blue'>이김</p>";
-      const lose = "<p class='red'>졌다</p>";
-      const draw = "<p class='yellow'>비김</p>";
 
+      const result = {
+        win: "<p class='blue'>이김</p>",
+        lose: "<p class='red'>졌다</p>",
+        draw: "<p class='yellow'>비김</p>",
+      };
       function Judgment(human, cpu) {
         const judg = document.querySelector("#judgment");
 
         if (human == cpu) {
           //alert("비김");
           score.drawNum++;
-          show(draw, score);
+          show(result.draw, score);
         } else if (
           (human == 0 && cpu == 1) ||
           (human == 2 && cpu == 0) ||
           (human == 1 && cpu == 2)
         ) {
           score.loseNum++;
-          show(lose, score);
+          show(result.lose, score);
         } else if (
           (human == 1 && cpu == 0) ||
           (human == 0 && cpu == 2) ||
           (human == 2 && cpu == 1)
         ) {
           score.winNum++;
-          show(win, score);
+          show(result.win, score);
         }
       }
 

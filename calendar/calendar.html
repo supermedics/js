@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      #calendar {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      #conthName {
+        position: relative;
+      }
+      #monthName::before,
+      #monthName::after {
+        position: absolute;
+        /* left: -97px; */
+        top: 16px;
+        content: "";
+        width: 10px; /* 사이즈 */
+        height: 10px; /* 사이즈 */
+        border-top: 3px solid #000; /* 선 두께 */
+        border-right: 3px solid #000; /* 선 두께 */
+        transform: rotate(225deg); /* 각도 */
+      }
+      #monthName::before {
+        right: 197px;
+      }
+      #monthName::after {
+        left: 197px;
+        transform: rotate(45deg); /* 각도 */
+      }
+      #monthName.clicked::before {
+        background-color: red;
+      }
+      #monthName.clicked::after {
+        background-color: red;
+      }
+      #cal_body {
+        width: 700px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .onMonth {
+        width: 100px;
+        height: 100px;
+        border: 1px gray solid;
+      }
+      .outMonth {
+        width: 100px;
+        height: 100px;
+      }
+      .sunday {
+        color: red;
+        background-color: rgb(208, 84, 84);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="calendar">
+      <div style="position: relative"><div id="monthName"></div></div>
+      <div id="cal_body"></div>
+    </div>
+    <script>
+      let calendar = document.querySelector("#calendar");
+      let monthName = document.querySelector("#monthName");
+      let cal_body = document.querySelector("#cal_body");
+      let inputMonth = new Date().getMonth() + 1;
+
+      let time = new Date(2023, inputMonth - 1, 1);
+      let month = time.getMonth() + 1;
+      let week = time.getDay();
+      console.log(week);
+      console.log(month);
+      console.dir(monthName);
+      monthName.innerHTML = "<h1>" + time.getFullYear() + "." + month + "</h1>";
+      for (let i = 1 - week; i < 35; i++) {
+        let now = new Date(2023, inputMonth - 1, i);
+
+        if (inputMonth == now.getMonth() + 1) {
+          cal_body.insertAdjacentHTML(
+            "beforeend",
+            "<div class='onMonth'>" + i + "<div>"
+          );
+          console.log(now.getMonth());
+        } else {
+          cal_body.insertAdjacentHTML(
+            "beforeend",
+            "<div class='outMonth'>" + "" + "<div>"
+          );
+        }
+      }
+      (() => {
+        let button = document.querySelector("#monthName");
+        button.addEventListener("click", () => {
+          button.classList.toggle("clicked");
+          console.log(inputMonth);
+          inputMonth--;
+        });
+      })();
+    </script>
+  </body>
+</html>
